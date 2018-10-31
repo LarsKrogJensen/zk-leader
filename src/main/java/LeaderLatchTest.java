@@ -14,15 +14,15 @@ public class LeaderLatchTest {
         CuratorFramework client = CuratorFrameworkFactory.newClient("localhost:2181", retryPolicy);
         client.start();
 
-        IntStream.range(0, 100).forEach(id -> startLatch(client, id));
+        IntStream.range(0, 100).forEach(id -> startLatch(client, id, args[0]));
 
         System.in.read();
         client.close();
     }
 
-    private static void startLatch(CuratorFramework client, final int id)  {
+    private static void startLatch(CuratorFramework client, final int id, final String nodeId)  {
         try {
-            final LeaderLatch latch = new LeaderLatch(client, "/leader/" + id, "id-1");
+            final LeaderLatch latch = new LeaderLatch(client, "/leader/" + id, nodeId);
             latch.start();
             latch.addListener(new LeaderLatchListener() {
                 public void isLeader() {
