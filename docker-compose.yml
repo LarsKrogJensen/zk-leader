@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  zookeeper:
+    image: zookeeper:3.5.4-beta
+    hostname: zoo1
+    ports:
+    - 2181:2181
+  zk-web:
+    image: tobilg/zookeeper-webui
+    ports:
+    - 8080:8080
+    environment:
+      - ZK_DEFAULT_NODE=192.168.1.41:2181
