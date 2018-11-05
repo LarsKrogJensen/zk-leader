@@ -1,11 +1,13 @@
 version: '3.1'
 
 services:
-  zookeeper:
-    image: zookeeper:3.5.4-beta
-    hostname: zoo1
+  zookeeper1:
+    image: zookeeper:3.4.13
+    hostname: zoo2
     ports:
     - 2181:2181
+    volumes:
+      - ./data:/data
   zk-web:
     image: tobilg/zookeeper-webui
     ports:
